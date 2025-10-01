@@ -10,6 +10,7 @@
     "start": "electron .",
     "start:build": "npm run build && electron .",
     "dev": "electron .",
+    "dev:test": "node dev-test.js",
     "dev:watch": "nodemon --exec ts-node src/main/main.ts",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
@@ -25,7 +26,6 @@
   "author": "AutoReach Pro Team",
   "license": "MIT",
   "dependencies": {
-    "electron": "^38.1.2",
     "puppeteer": "^24.22.3",
     "ws": "^8.18.3"
   },
@@ -33,6 +33,7 @@
     "@types/electron": "^1.6.12",
     "@types/node": "^22.7.5",
     "@types/ws": "^8.18.1",
+    "electron": "^27.3.11",
     "electron-builder": "^26.0.12",
     "nodemon": "^3.1.10",
     "shx": "^0.3.4",
@@ -46,23 +47,34 @@
       "output": "release"
     },
     "files": [
+      "main.js",
+      "preload.js",
+      "electron-ui.html",
       "dist/**/*",
       "node_modules/**/*",
       "logo-black.png",
       "icon.icns",
-      "!src/**"
+      "!src/**",
+      "!node_modules/puppeteer/.local-chromium/**/*"
     ],
-    "asar": true,
+    "asar": false,
     "icon": "icon.icns",
+    "buildDependenciesFromSource": false,
+    "nodeGypRebuild": false,
+    "npmRebuild": false,
     "mac": {
       "category": "public.app-category.productivity",
       "target": "dmg",
       "identity": null,
-      "icon": "icon.icns"
+      "icon": "icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist"
     },
     "win": {
       "target": "nsis",
-      "icon": "logo-black.png"
+      "icon": "icon.icns"
     },
     "linux": {
       "target": "AppImage",

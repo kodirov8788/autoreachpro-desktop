@@ -20,22 +20,26 @@ A WebSocket-based desktop application for automated form filling and web interac
 ## 🛠️ Installation
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/kodirov8788/autoreachpro-desktop.git
 cd autoreachpro-desktop
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Build the Application
+
 ```bash
 npm run build
 ```
 
 ### 4. Start the Application
+
 ```bash
 npm start
 ```
@@ -43,6 +47,7 @@ npm start
 ## 🔧 Development
 
 ### Development Mode
+
 ```bash
 # Run in development mode with hot reload
 npm run dev
@@ -52,6 +57,7 @@ npm run dev:watch
 ```
 
 ### Building for Production
+
 ```bash
 # Build TypeScript and copy renderer files
 npm run build
@@ -102,6 +108,7 @@ The application uses **electron-builder** for packaging with the following targe
 - **Linux**: AppImage for universal Linux compatibility
 
 ### Build Scripts
+
 - `npm run build`: Compile TypeScript and prepare files
 - `npm run pack`: Create unpacked application
 - `npm run dist`: Create distributables for all platforms
@@ -111,11 +118,13 @@ The application uses **electron-builder** for packaging with the following targe
 The application exposes a WebSocket server for real-time communication:
 
 ### Connection
+
 - **Port**: 8080 (configurable)
 - **Protocol**: WebSocket
 - **Authentication**: Token-based (optional)
 
 ### Available Commands
+
 - `start-automation`: Begin form filling process
 - `stop-automation`: Stop current automation
 - `get-status`: Get current automation status
@@ -131,6 +140,7 @@ The application exposes a WebSocket server for real-time communication:
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 # Run the test script
 ./test-desktop-app.sh
@@ -140,7 +150,9 @@ npm test
 ```
 
 ### Test Coverage
+
 The application includes comprehensive tests for:
+
 - WebSocket communication
 - Form automation logic
 - Security features
@@ -149,12 +161,14 @@ The application includes comprehensive tests for:
 ## 📦 Distribution
 
 ### Creating Releases
+
 1. Update version in `package.json`
 2. Run `npm run dist` to build all platforms
 3. Upload artifacts to GitHub Releases
 4. Update documentation with new features
 
 ### Supported Platforms
+
 - **Windows**: Windows 10/11 (x64)
 - **macOS**: macOS 10.15+ (Intel and Apple Silicon)
 - **Linux**: Ubuntu 18.04+, CentOS 7+, and other modern distributions
@@ -168,6 +182,7 @@ The application includes comprehensive tests for:
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow TypeScript best practices
 - Write comprehensive tests
 - Update documentation for new features
@@ -186,6 +201,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## 🔄 Changelog
 
 ### Version 1.0.0
+
 - Initial release
 - WebSocket-based communication
 - Cross-platform support

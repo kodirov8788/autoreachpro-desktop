@@ -27,6 +27,7 @@ All messages follow this JSON structure:
 ### Commands
 
 #### 1. Start Automation
+
 ```json
 {
   "type": "command",
@@ -47,6 +48,7 @@ All messages follow this JSON structure:
 ```
 
 **Response:**
+
 ```json
 {
   "type": "response",
@@ -60,6 +62,7 @@ All messages follow this JSON structure:
 ```
 
 #### 2. Stop Automation
+
 ```json
 {
   "type": "command",
@@ -71,6 +74,7 @@ All messages follow this JSON structure:
 ```
 
 #### 3. Get Status
+
 ```json
 {
   "type": "command",
@@ -82,6 +86,7 @@ All messages follow this JSON structure:
 ```
 
 **Response:**
+
 ```json
 {
   "type": "response",
@@ -96,6 +101,7 @@ All messages follow this JSON structure:
 ```
 
 #### 4. Update Form Data
+
 ```json
 {
   "type": "command",
@@ -111,6 +117,7 @@ All messages follow this JSON structure:
 ```
 
 #### 5. Get Available Forms
+
 ```json
 {
   "type": "command",
@@ -122,6 +129,7 @@ All messages follow this JSON structure:
 ```
 
 **Response:**
+
 ```json
 {
   "type": "response",
@@ -181,6 +189,7 @@ All errors follow this format:
 The API also supports event streaming for real-time updates:
 
 #### Automation Events
+
 ```json
 {
   "type": "event",
@@ -195,6 +204,7 @@ The API also supports event streaming for real-time updates:
 ```
 
 #### Browser Events
+
 ```json
 {
   "type": "event",
@@ -212,10 +222,10 @@ The API also supports event streaming for real-time updates:
 Optional authentication can be enabled by including a token in the connection:
 
 ```javascript
-const ws = new WebSocket('ws://localhost:8080', {
+const ws = new WebSocket("ws://localhost:8080", {
   headers: {
-    'Authorization': 'Bearer your-token-here'
-  }
+    Authorization: "Bearer your-token-here",
+  },
 });
 ```
 
@@ -228,31 +238,35 @@ const ws = new WebSocket('ws://localhost:8080', {
 ### Examples
 
 #### JavaScript Client
-```javascript
-const ws = new WebSocket('ws://localhost:8080');
 
-ws.onopen = function() {
+```javascript
+const ws = new WebSocket("ws://localhost:8080");
+
+ws.onopen = function () {
   // Start automation
-  ws.send(JSON.stringify({
-    type: 'command',
-    command: 'start-automation',
-    data: {
-      url: 'https://example.com/form',
-      formData: {
-        name: 'John Doe',
-        email: 'john@example.com'
-      }
-    }
-  }));
+  ws.send(
+    JSON.stringify({
+      type: "command",
+      command: "start-automation",
+      data: {
+        url: "https://example.com/form",
+        formData: {
+          name: "John Doe",
+          email: "john@example.com",
+        },
+      },
+    })
+  );
 };
 
-ws.onmessage = function(event) {
+ws.onmessage = function (event) {
   const message = JSON.parse(event.data);
-  console.log('Received:', message);
+  console.log("Received:", message);
 };
 ```
 
 #### Python Client
+
 ```python
 import websocket
 import json
@@ -281,3 +295,4 @@ ws = websocket.WebSocketApp("ws://localhost:8080",
                           on_message=on_message)
 ws.run_forever()
 ```
+
