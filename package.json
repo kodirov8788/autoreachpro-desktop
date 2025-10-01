@@ -1,0 +1,72 @@
+{
+  "name": "autoreach-pro-desktop",
+  "version": "1.0.0",
+  "description": "AutoReach Pro Desktop App - WebSocket-based form automation",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "build": "tsc && npm run copy-renderer",
+    "copy-renderer": "shx mkdir -p dist/renderer && shx cp -r src/renderer/* dist/renderer/",
+    "start": "electron .",
+    "start:build": "npm run build && electron .",
+    "dev": "electron .",
+    "dev:watch": "nodemon --exec ts-node src/main/main.ts",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "puppeteer",
+    "automation",
+    "websocket"
+  ],
+  "author": "AutoReach Pro Team",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^38.1.2",
+    "puppeteer": "^24.22.3",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.12",
+    "@types/node": "^22.7.5",
+    "@types/ws": "^8.18.1",
+    "electron-builder": "^26.0.12",
+    "nodemon": "^3.1.10",
+    "shx": "^0.3.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "build": {
+    "appId": "com.autoreachpro.desktop",
+    "productName": "AutoReach Pro デスクトップ",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "logo-black.png",
+      "icon.icns",
+      "!src/**"
+    ],
+    "asar": true,
+    "icon": "icon.icns",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": "dmg",
+      "identity": null,
+      "icon": "icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "logo-black.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "logo-black.png"
+    }
+  }
+}

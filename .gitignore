@@ -1,0 +1,113 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+release/
+build/
+
+# Chrome user data directories (temporary browser profiles)
+chrome-user-data*/
+chrome-user-data/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Electron specific
+out/
+app/
+*.dmg
+*.exe
+*.deb
+*.rpm
+*.AppImage
+
+# Temporary files
+*.tmp
+*.temp
+cookies.txt
+
+# Backup files
+backup/
+*.backup
+*.bak
+
+# Test files (keep only essential ones)
+test-*.js
+test-*.html
+!test-desktop-app.sh
+
+# Development files
+debug-*.js
+working-*.js
+simple-*.js
+minimal-*.js
+complete-*.js
+direct-*.js
+fixed-*.js
+final-*.js
+polling-*.js
+status-checker.js
+connection-code-input.html
+test-connection.js
+test-ui.html
+working-preview.html
+install-and-test.sh
+fix-node-compatibility.sh
+
+# TypeScript build info
+*.tsbuildinfo
