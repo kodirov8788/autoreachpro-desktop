@@ -2100,10 +2100,10 @@ class AutoReachDesktopApp extends EventEmitter {
         // Add overlay content
         overlay.innerHTML = `
           <div style="margin-bottom: 10px;">🤖 AutoReach Pro</div>
-          <div style="font-size: 14px; margin-bottom: 10px;">Auto-filling form...</div>
-          <div>Browser closes in:</div>
+          <div style="font-size: 14px; margin-bottom: 10px;">フォームを自動入力中...</div>
+          <div>ブラウザは以下で閉じます:</div>
           <div class="countdown-number" id="countdown-timer">60</div>
-          <div style="font-size: 12px; margin-top: 5px; opacity: 0.8;">seconds</div>
+          <div style="font-size: 12px; margin-top: 5px; opacity: 0.8;">秒</div>
           <button id="close-now-btn" style="
             background: #ff5722;
             color: white;
@@ -2116,7 +2116,7 @@ class AutoReachDesktopApp extends EventEmitter {
             cursor: pointer;
             transition: background 0.2s;
           " onmouseover="this.style.background='#e64a19'" onmouseout="this.style.background='#ff5722'">
-            Close Now
+            今すぐ閉じる
           </button>
         `;
 
@@ -2392,7 +2392,17 @@ class AutoReachDesktopApp extends EventEmitter {
       // Check for manual close requests periodically
       const manualCloseChecker = setInterval(async () => {
         try {
-          if (browser && browser.isConnected()) {
+          if (browser && browser.isConnected() && !page.isClosed()) {
+            // Check if page is still valid and has active frames
+            const frames = page.frames();
+            if (frames.length === 0) {
+              console.log(
+                `⚠️ No active frames for ${businessName}, stopping manual close checker`
+              );
+              clearInterval(manualCloseChecker);
+              return;
+            }
+
             const manualCloseRequested = await page.evaluate(() => {
               return window.autoreachManualClose || false;
             });
@@ -2409,12 +2419,26 @@ class AutoReachDesktopApp extends EventEmitter {
                 `✅ Browser closed successfully for ${businessName} (manual close)`
               );
             }
+          } else {
+            // Browser or page is closed, stop checking
+            clearInterval(manualCloseChecker);
           }
         } catch (error) {
-          console.error(
-            `❌ Error checking manual close for ${businessName}:`,
-            error
-          );
+          // If it's a detached frame error, stop the checker
+          if (
+            error.message.includes("detached Frame") ||
+            error.message.includes("Target closed")
+          ) {
+            console.log(
+              `⚠️ Page/frame detached for ${businessName}, stopping manual close checker`
+            );
+            clearInterval(manualCloseChecker);
+          } else {
+            console.error(
+              `❌ Error checking manual close for ${businessName}:`,
+              error
+            );
+          }
         }
       }, 1000); // Check every second
 
