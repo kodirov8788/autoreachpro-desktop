@@ -914,6 +914,30 @@ class AutoReachDesktopApp extends EventEmitter {
       this.log("DEBUG", "AutoReachDesktopApp", "Setting up IPC handlers");
       this.setupIPC();
 
+      // Auto-start WebSocket server immediately
+      this.log("INFO", "AutoReachDesktopApp", "Auto-starting WebSocket server");
+      const enableResult = await this.enableServer();
+      if (enableResult.success) {
+        this.log(
+          "INFO",
+          "AutoReachDesktopApp",
+          "🟢 Auto-started WebSocket server",
+          {
+            port: enableResult.port,
+            status: "GREEN - Ready for connections",
+          }
+        );
+      } else {
+        this.log(
+          "ERROR",
+          "AutoReachDesktopApp",
+          "Failed to auto-start WebSocket server",
+          {
+            error: enableResult.error,
+          }
+        );
+      }
+
       // Start real-time status updates
       this.log("DEBUG", "AutoReachDesktopApp", "Starting status updates");
       this.startStatusUpdates();
@@ -925,11 +949,12 @@ class AutoReachDesktopApp extends EventEmitter {
       this.log(
         "INFO",
         "AutoReachDesktopApp",
-        "AutoReach Desktop App started successfully",
+        "AutoReach Desktop App started successfully with auto-start",
         {
           isRunning: this.isRunning,
           isServerEnabled: this.isServerEnabled,
           port: this.port,
+          autoStarted: true,
         }
       );
     } catch (error) {
